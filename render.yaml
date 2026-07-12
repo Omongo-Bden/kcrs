@@ -8,15 +8,10 @@ services:
     startCommand: "gunicorn config.wsgi:application --workers 4 --bind 0.0.0.0:$PORT"
     envVars:
       - key: PYTHON_VERSION
-        value: 3.11.0
+        value: "3.11.0"
       - key: DATABASE_URL
         fromDatabase:
           name: crs-db
-          property: connectionString
-      - key: REDIS_URL
-        fromService:
-          type: redis
-          name: crs-redis
           property: connectionString
       - key: SECRET_KEY
         generateValue: true
@@ -33,40 +28,16 @@ services:
       - key: AWS_STORAGE_BUCKET_NAME
         sync: false
 
-  # Celery Worker Service
-  - type: worker
-    name: crs-celery
-    env: python
-    rootDir: backend
-    buildCommand: "chmod +x build.sh && ./build.sh"
-    startCommand: "celery -A config worker --loglevel=info"
-    envVars:
-      - key: PYTHON_VERSION
-        value: 3.11.0
-      - key: DATABASE_URL
-        fromDatabase:
-          name: crs-db
-          property: connectionString
-      - key: REDIS_URL
-        fromService:
-          type: redis
-          name: crs-redis
-          property: connectionString
-      - key: SECRET_KEY
-        generateValue: true
-      - key: DEBUG
-        value: "False"
-
-  # Frontend Static Site
+  # Frontend Static Site (Free and highly optimized)
   - type: web
     name: crs-frontend
-    env: node
+    env: static
     rootDir: frontend
     buildCommand: "npm install && npm run build"
-    startCommand: "npm run preview -- --port $PORT --host 0.0.0.0"
+    staticPublishPath: "dist"
     envVars:
       - key: NODE_VERSION
-        value: 18.17.0
+        value: "18.17.0"
       - key: VITE_API_URL
         value: "https://crs-backend.onrender.com/api"
       - key: VITE_API_BASE_URL
@@ -76,8 +47,4 @@ databases:
   - name: crs-db
     databaseName: crs
     user: crs_user
-    plan: free
-
-  - type: redis
-    name: crs-redis
     plan: free
