@@ -38,7 +38,7 @@ services:
     staticPublishPath: "dist"
     envVars:
       - key: NODE_VERSION
-        value: "18.17.0"
+        value: "20.19.0"
       - key: VITE_API_URL
         value: "https://crs-backend.onrender.com/api"
       - key: VITE_API_BASE_URL
