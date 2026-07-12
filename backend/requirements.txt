@@ -16,4 +16,5 @@ whitenoise
 django-ipware
 dj-database-url
 django-storages
-boto3  
+boto3
+cryptography  
