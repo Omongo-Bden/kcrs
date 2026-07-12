@@ -3,6 +3,7 @@ services:
   - type: web
     name: crs-backend
     env: python
+    plan: free
     rootDir: backend
     buildCommand: "chmod +x build.sh && ./build.sh"
     startCommand: "gunicorn config.wsgi:application --workers 4 --bind 0.0.0.0:$PORT"
@@ -32,6 +33,7 @@ services:
   - type: web
     name: crs-frontend
     env: static
+    plan: free
     rootDir: frontend
     buildCommand: "npm install && npm run build"
     staticPublishPath: "dist"
