@@ -1,0 +1,47 @@
+:root {
+  --ink: #1a1a18;
+  --paper: #faf9f6;
+  --forest: #1a4a35;
+  --border: rgba(26,26,24,0.12);
+}
+
+body {
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5rem 5%;
+  border-bottom: 1px solid var(--border);
+}
+
+.form-card {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 30px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0 20px;
+  border: 1px solid var(--border);
+  background: var(--paper);
+}
+
+.submit-btn {
+  background: var(--forest);
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+.badge.pending { color: #b85c1a; background: #fff5ed; padding: 4px 8px; border-radius: 4px; }
